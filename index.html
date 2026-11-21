@@ -140,6 +140,10 @@ body.dark .btn.primary{color:#0d1626}
 #tabs button.on{color:var(--ink);font-weight:800}
 #tabs button.on .ti{-webkit-transform:scale(1.12);transform:scale(1.12)}
 #tabs{overflow:hidden}
+#tabs button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-short{display:none}
+body.standalone #tabs{padding-left:14px;padding-right:14px;padding-bottom:10px}
+@media (max-width:430px){ .tl-long{display:none} .tl-short{display:inline} }
 html,body{overflow-x:hidden}
 .fab{position:fixed;right:22px;bottom:88px;width:64px;height:64px;border-radius:32px;background:var(--heart);color:#fff;font-size:34px;border:0;box-shadow:0 6px 18px var(--shadow);line-height:64px;padding:0;z-index:20}
 .fab.hidden{display:none}
@@ -465,7 +469,7 @@ body.dark .mlabel.fer{color:#d8bb62}
     <button data-act="tab" data-tab="shop"><span class="ti">&#128722;</span>Einkauf</button>
     <button data-act="tab" data-tab="meal"><span class="ti">&#127869;</span>Essen</button>
     <button data-act="tab" data-tab="notes"><span class="ti">&#128221;</span>Notizen</button>
-    <button data-act="tab" data-tab="bday"><span class="ti">&#127874;</span>Geburtstage</button>
+    <button data-act="tab" data-tab="bday"><span class="ti">&#127874;</span><span class="tl-long">Geburtstage</span><span class="tl-short">Geburtst.</span></button>
   </nav>
 </div>
 
@@ -992,7 +996,7 @@ function render(){
   });
   var tb = document.querySelectorAll('#tabs button');
   for (var i = 0; i < tb.length; i++) tb[i].className = tb[i].getAttribute('data-tab') === UI.tab ? 'on' : '';
-  $('fab').className = 'fab' + (UI.tab === 'meal' || UI.tab === 'shop' ? ' hidden' : '');
+  $('fab').className = 'fab' + (UI.tab === 'meal' || UI.tab === 'shop' || UI.tab === 'bday' ? ' hidden' : '');
   var tc = $('themeColor'); if (tc) tc.setAttribute('content', isDark() ? '#0d1626' : '#edf3fa');
   if (UI.tab === 'today') renderToday();
   else if (UI.tab === 'cal') renderCal();
@@ -1187,7 +1191,7 @@ function renderMeals(){
 function renderBirthdays(){
   var t = today(), ds = ymd(t);
   var list = bdList().map(function(b){ return {b:b, d:nextBd(b, t)}; }).sort(function(a, b){ return a.d - b.d; });
-  if (!list.length) { $('bdayBody').innerHTML = '<div class="empty-state">Noch keine Geburtstage eingetragen.<br><br><button class="btn primary" data-act="bday-edit">Geburtstage eintragen</button></div>'; return; }
+  if (!list.length) { $('bdayBody').innerHTML = '<div class="empty-state">Noch keine Geburtstage eingetragen.<br><br><button class="btn primary" data-act="bday-edit">Geburtstage hinzufügen</button></div>'; return; }
   var nx = list[0], nn = dayDiff(ds, ymd(nx.d)), na = bdAge(nx.b, nx.d);
   var html = '<div class="bd-next"><span class="big">\uD83C\uDF82</span><div><span>Als Nächstes</span><b>' + esc(nx.b.name) + (na !== null && na > 0 ? ' wird ' + na : '') + '</b><span>' +
     DOW_LONG[nx.d.getDay()] + ', ' + nx.d.getDate() + '. ' + MON_LONG[nx.d.getMonth()] + ' · ' + (nn === 0 ? 'heute \uD83C\uDF89' : (nn === 1 ? 'morgen' : 'in ' + nn + ' Tagen')) + '</span></div></div>';
@@ -1200,7 +1204,6 @@ function renderBirthdays(){
       '<div class="bd-name">' + esc(x.b.name) + '<small>' + DOW_LONG[x.d.getDay()] + (a !== null && a > 0 ? ' · wird ' + a : '') + '</small></div>' +
       '<div class="bd-in">' + (n === 0 ? 'Heute \uD83C\uDF89' : (n === 1 ? 'Morgen' : 'in ' + n + ' T.')) + '</div></div>';
   });
-  html += '<div class="actions"><span class="grow"></span><button class="btn" data-act="bday-edit">\u270E Geburtstage bearbeiten</button></div>';
   $('bdayBody').innerHTML = html;
 }
 
@@ -1689,6 +1692,7 @@ function openSettings(page){
     'm-exp-copy': function(){ if (lastExport) copyText(lastExport.text); },
     'm-exp-csv': function(){
       if (!lastExport) return;
+      if (db) { copyText(lastExport.csv); toast('In dieser Version: Tabelle kopiert – in Excel einfügen'); return; }
       try {
         var blob = new Blob(['﻿' + lastExport.csv], {type:'text/csv;charset=utf-8'});
         var url = URL.createObjectURL(blob), a = document.createElement('a');
