@@ -137,6 +137,8 @@ body.dark .btn.primary{color:#0d1626}
 #tabs .ti{display:block;font-size:24px;line-height:1.25}
 #tabs button.on{color:var(--ink);font-weight:800}
 #tabs button.on .ti{-webkit-transform:scale(1.12);transform:scale(1.12)}
+#tabs{overflow:hidden}
+html,body{overflow-x:hidden}
 .fab{position:fixed;right:22px;bottom:88px;width:64px;height:64px;border-radius:32px;background:var(--heart);color:#fff;font-size:34px;border:0;box-shadow:0 6px 18px var(--shadow);line-height:64px;padding:0;z-index:20}
 .fab.hidden{display:none}
 
@@ -179,12 +181,104 @@ select.inp{background:var(--input) url("data:image/svg+xml;utf8,<svg xmlns='http
 
 #toast{position:fixed;left:50%;bottom:104px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:12px;font-size:16px;z-index:70;opacity:0;-webkit-transition:opacity .25s;transition:opacity .25s;pointer-events:none;max-width:90%;text-align:center}
 #toast.show{opacity:1}
-@media (max-width:520px){
-  .ev-time{width:70px;font-size:13px}
-  .mcell{min-height:70px}
-  .mev{font-size:10px;padding:1px 3px}
-  .range{min-width:120px;font-size:16px}
-  .add-row input.qty{width:76px}
+main{overflow-x:hidden}
+
+/* ---------- Kleine Tablets ---------- */
+@media (max-width:700px){
+  .mcell{min-height:84px}
+  .hero img{width:130px;height:130px}
+}
+
+/* ---------- Smartphones ---------- */
+@media (max-width:560px){
+  header{padding:8px 12px 4px}
+  main{padding:0 12px 100px}
+  .logo{width:40px;height:40px;border-radius:20px;margin-right:10px}
+  h1{font-size:21px}
+  .todayline{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sync{font-size:11px;padding:4px 8px;margin-right:8px}
+  .icon-btn{width:40px;height:40px;font-size:20px}
+
+  .toolbar{margin:0 0 6px}
+  .toolbar > *{margin:3px 6px 3px 0}
+  .nav-btn{width:40px;height:40px;font-size:24px}
+  .range{-webkit-flex:1 0 auto;flex:1 0 auto;width:-webkit-calc(100% - 104px);width:calc(100% - 104px);min-width:0;font-size:16px}
+  .range small{font-size:11px}
+  .btn{min-height:40px;padding:0 12px;font-size:15px}
+  .seg button{min-height:38px;padding:0 12px;font-size:15px}
+
+  /* Personen-Filter als eine wischbare Zeile */
+  #memberFilter{-webkit-flex-wrap:nowrap;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -12px 6px;padding:0 12px 2px}
+  #memberFilter .chip{-webkit-flex:none;flex:none;min-height:36px;margin-bottom:4px}
+  #memberFilter::-webkit-scrollbar{display:none}
+
+  /* Woche */
+  .day-head{width:52px;padding:8px 0}
+  .dnum{font-size:21px}
+  .dow{font-size:11px}
+  .day-body{padding:6px}
+  .ev{font-size:15px;padding:6px 6px 6px 8px;min-height:42px;border-left-width:4px}
+  .ev-time{width:58px;font-size:12px;line-height:1.25}
+  .avs .av{width:22px;height:22px;font-size:9px;margin-left:2px}
+  .wbadge{font-size:12px;padding:2px 8px 2px 3px;min-height:28px;margin-right:4px}
+  .empty{font-size:14px;padding:8px 4px}
+  .meal-line{font-size:13px}
+
+  /* Monat: farbige Punkte statt Text */
+  .mcell{min-height:62px;padding:3px 2px}
+  .mnum{font-size:14px;margin:1px 2px 3px;padding:0 6px;display:table}
+  .mev{display:inline-block;width:8px;height:8px;border-radius:4px;padding:0;margin:0 2px 2px 2px;font-size:0;line-height:0;vertical-align:top}
+  .mlabel{display:none}
+  .more{font-size:10px;padding-left:2px}
+  .mhead{font-size:12px;padding:6px 0}
+
+  /* Einkauf */
+  .add-row input{height:48px;font-size:17px;padding:0 10px;margin-right:6px}
+  .add-row input.qty{width:84px}
+  .add-row .btn{min-height:48px}
+  .item{min-height:52px}
+  .check{width:50px;height:52px}
+  .check:after{left:12px;top:13px;width:26px;height:26px}
+  .item.done .check:before{left:0;width:50px;top:13px;line-height:26px}
+  .item-text{font-size:17px;padding:12px 0}
+  .edit{width:38px}
+  .del{width:40px}
+
+  /* Essen */
+  .slot{padding:8px 10px;min-height:62px;font-size:15px}
+  .slot-label{font-size:11px}
+
+  /* Notizen */
+  .notes-grid .note{min-height:110px;padding:12px}
+
+  /* Heute */
+  .hero{padding:12px;margin-bottom:12px;border-radius:18px}
+  .hero img{width:92px;height:92px;border-radius:12px;margin-right:12px}
+  .hero .hgreet{font-size:21px}
+  .hero .hday{font-size:18px}
+  .hero .hsub{font-size:13px}
+  .hero .clock{font-size:32px;margin-top:2px}
+  .tcard{padding:12px}
+
+  /* Dialoge */
+  .modal{padding:12px 6px 40px}
+  .sheet{padding:16px 14px 12px;border-radius:16px}
+  .sheet h2{font-size:20px;margin-bottom:12px}
+  .inp{font-size:16px}
+  .mem-top .av{width:32px;height:32px;margin-right:8px}
+  .sw{width:32px;height:32px}
+  .wseg button{padding:0 10px;font-size:14px}
+  .actions .btn{-webkit-flex:1 1 auto;flex:1 1 auto}
+
+  /* Tabs */
+  #tabs button{min-height:56px;font-size:11px;padding:6px 0 8px}
+  #tabs .ti{font-size:22px}
+  .fab{right:16px;bottom:76px;width:58px;height:58px;line-height:58px;font-size:30px}
+}
+@media (max-width:380px){
+  .ev-time{width:50px;font-size:11px}
+  .hero img{display:none}
+  .mem-top .check-row{font-size:14px}
 }
 
 /* Darkmode-Feinheiten */
@@ -379,7 +473,7 @@ var FERIEN = [
 ];
 
 /* ---------- Zustand ---------- */
-var S = {members: clone(DEFAULT_MEMBERS), pattern: {}, events:{}, shopping:{}, meals:{}, notes:{}, work:{}};
+var S = {members: clone(DEFAULT_MEMBERS), pattern: {}, events:{}, shopping:{}, meals:{}, notes:{}, work:{}, gone:{}};
 var UI = {tab:'today', calMode:'week', calRef:today(), mealRef:today(), filter:[]};
 var PREFS = {theme:'auto', big:false, hol:true, ferien:true, karneval:true};
 var db = null;
@@ -431,6 +525,7 @@ function loadCache(){
         if (Array.isArray(d.members) && d.members.length) S.members = sanitizeMembers(d.members);
         if (d.pattern && typeof d.pattern === 'object') S.pattern = d.pattern;
         if (typeof d.cfgUpdated === 'number') S.cfgUpdated = d.cfgUpdated;
+        if (d.gone && typeof d.gone === 'object') S.gone = d.gone;
         COLS.forEach(function(c){ if (d[c] && typeof d[c] === 'object') S[c] = d[c]; });
       }
     }
@@ -544,8 +639,11 @@ function writeErr(e){
   else toast('Speichern in der Cloud fehlgeschlagen. Bitte später erneut versuchen.');
 }
 function put(col, obj){
+  /* Verknüpfung zu Outlook/To Do beim Bearbeiten erhalten */
+  var prev = S[col][obj.id];
+  if (prev) ['msId','msMod','msSync','msSkip','msReadOnly','colorAt'].forEach(function(k){ if (!(k in obj) && (k in prev)) obj[k] = prev[k]; });
   obj.updated = Date.now();
-  if (col === 'work') S.cfgUpdated = obj.updated;
+  if (col === 'work' || col === 'meals') delete S.gone[col + '/' + obj.id];
   S[col][obj.id] = obj;
   msChanged();
   persist();
@@ -558,7 +656,7 @@ function put(col, obj){
 function del(col, id){
   var old = S[col][id];
   if (old && old.msId && MS_COLS[col]) { MSS.tomb.push({col:col, msId:old.msId, list:MSS.ids[MS_COLS[col]] || ''}); saveMS(); }
-  if (col === 'work') S.cfgUpdated = Date.now();
+  if (col === 'work' || col === 'meals') S.gone[col + '/' + id] = Date.now();
   delete S[col][id];
   msChanged();
   persist();
@@ -577,6 +675,7 @@ function putConfig(){
 }
 
 /* ---------- Cloud-Verbindung ---------- */
+function narrow(){ return (window.innerWidth || 1024) <= 560; }
 function setSync(state){
   syncState = state;
   var el = $('sync');
@@ -592,6 +691,11 @@ function setSync(state){
     'ms-error': ['Sync-Fehler', 'sync warn']
   };
   var m = map[state] || map.connecting;
+  if (narrow()) {
+    var short = {connecting:'…', ok:'\u2601\uFE0E', stale:'Offline', error:'Fehler', local:'Lokal', 'ms-busy':'\u21BB', 'ms-login':'Anmelden!', 'ms-error':'Fehler'};
+    if (state === 'ms-ok') m = [m[0].replace(' Outlook', ''), m[1]];
+    else if (short[state]) m = [short[state], m[1]];
+  }
   el.textContent = m[0];
   el.className = m[1];
 }
@@ -728,7 +832,7 @@ function workBadges(ds){
 /* ---------- Rendering ---------- */
 function render(){
   var t = today();
-  $('todayLine').textContent = fmtLong(t) + ' ' + t.getFullYear() + ' · KW ' + isoWeek(t);
+  $('todayLine').textContent = narrow() ? DOW[t.getDay()] + ', ' + t.getDate() + '. ' + MON[t.getMonth()] + ' · KW ' + isoWeek(t) : fmtLong(t) + ' ' + t.getFullYear() + ' · KW ' + isoWeek(t);
   applyTheme();
   var titles = {today:'Familienplaner', cal:'Kalender', shop:'Einkaufsliste', meal:'Essensplan', notes:'Notizen'};
   if (!titles[UI.tab]) UI.tab = 'today';
@@ -1180,7 +1284,8 @@ function openNote(id){
       var title = $('f-ntitle').value.trim(), text = $('f-ntext').value.trim();
       if (!title && !text) { toast('Die Notiz ist leer.'); return; }
       var c = document.querySelector('#f-ncolors .sw.on');
-      put('notes', {id: n ? n.id : uid('n'), title:title, text:text, color: c ? c.getAttribute('data-c') : 'gelb', pinned:$('f-pin').checked});
+      var col = c ? c.getAttribute('data-c') : 'gelb';
+      put('notes', {id: n ? n.id : uid('n'), title:title, text:text, color:col, colorAt: (n && n.color === col) ? (n.colorAt || 0) : Date.now(), pinned:$('f-pin').checked});
       closeModal();
     },
     'm-del': function(el){ armDelete(el, function(){ del('notes', n.id); closeModal(); toast('Notiz gelöscht'); }); }
@@ -1305,7 +1410,7 @@ var MS_KEY = 'familienplaner-ms';
 var MS_SCOPES = 'openid offline_access User.Read Calendars.ReadWrite Tasks.ReadWrite Files.ReadWrite.AppFolder';
 var GRAPH = 'https://graph.microsoft.com/v1.0';
 var MS_TZ = 'W. Europe Standard Time';
-var MS_COLS = {events:'cal', meals:'meal', shopping:'shop', notes:'notes'};
+var MS_COLS = {events:'cal', shopping:'shop', notes:'notes'};
 var MS_NAMEKEYS = {cal:'events', meal:'meals', shop:'shopping', notes:'notes'};
 var MS_DEFAULT_NAMES = {cal:'Familienplaner', meal:'Essensplan', shop:'Einkauf', notes:'Notizen'};
 var WD = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
@@ -1316,6 +1421,7 @@ var MSS = (function(){
   if (!d.names || typeof d.names !== 'object') d.names = clone(MS_DEFAULT_NAMES);
   if (!Array.isArray(d.tomb)) d.tomb = [];
   if (!d.ids || typeof d.ids !== 'object') d.ids = {};
+  d.tomb = d.tomb.filter(function(t){ return t.col !== 'meals'; });
   return d;
 })();
 function saveMS(){ try { localStorage.setItem(MS_KEY, JSON.stringify(MSS)); } catch (e) {} }
@@ -1428,9 +1534,10 @@ function msToken(){
     throw {msg:'Keine Verbindung zu Microsoft'};
   });
 }
-function gx(method, path, body){
+function gx(method, path, body, extra){
   return msToken().then(function(tok){
     var hd = {'Authorization':'Bearer ' + tok, 'Prefer':'outlook.timezone="' + MS_TZ + '", outlook.body-content-type="text"'};
+    if (extra) Object.keys(extra).forEach(function(k){ hd[k] = extra[k]; });
     if (body !== undefined) hd['Content-Type'] = 'application/json';
     return http(path.indexOf('https://') === 0 ? path : GRAPH + path, {method:method, headers:hd, body: body === undefined ? undefined : JSON.stringify(body)});
   }).then(function(r){
@@ -1484,11 +1591,13 @@ function syncCol(o){
         var l = byMs[r.id], mod = r.lastModifiedDateTime;
         if (!l) {
           var nw = o.from(r, null); nw.id = uid(o.prefix); nw.msId = r.id; nw.msMod = mod; nw.updated = nw.msSync = now;
+          if (o.forcePush && o.forcePush(r)) nw.msSync = now - 1;
           S[o.col][nw.id] = nw; changed = true; return;
         }
         if (mod === l.msMod) return;
         if ((l.updated || 0) > (l.msSync || 0) && l.updated > isoMs(mod)) return;
         var u = o.from(r, l); u.id = l.id; u.msId = r.id; u.msMod = mod; u.updated = u.msSync = now;
+        if (o.forcePush && o.forcePush(r)) u.msSync = now - 1;
         S[o.col][l.id] = u; changed = true;
       });
       values(S[o.col]).forEach(function(l){
@@ -1610,13 +1719,34 @@ function toMealEvent(m){
   return {subject:mealSubject(m), body:{contentType:'text', content:ing.join('\n\n')}, isAllDay:true, showAs:'free', isReminderOn:false,
     start:{dateTime:m.id + 'T00:00:00', timeZone:MS_TZ}, end:{dateTime:ymd(addDays(parse(m.id), 1)) + 'T00:00:00', timeZone:MS_TZ}};
 }
-var SYNC_MEALS = {
-  col:'meals', prefix:'x', list:null,
-  pushable: function(m){ return /^\d{4}-\d{2}-\d{2}$/.test(m.id); },
-  create: function(m){ return gx('POST', '/me/calendars/' + enc(MSS.ids.meal) + '/events', toMealEvent(m)); },
-  update: function(m){ return gx('PATCH', '/me/events/' + enc(m.msId), toMealEvent(m)); },
-  remove: function(t){ return gx('DELETE', '/me/events/' + enc(t.msId)); }
-};
+function norm(s){ return String(s || '').replace(/\r/g, '').trim(); }
+/* Der Essensplan-Kalender gehört der App: pro Tag genau ein Eintrag, passend zum Plan */
+function syncMealsOut(){
+  var from = addDays(today(), -14), to = addDays(today(), 120);
+  var q = '?startDateTime=' + ymd(from) + 'T00:00:00&endDateTime=' + ymd(to) + 'T00:00:00&$top=200&$select=id,subject,body,start';
+  return gall('/me/calendars/' + enc(MSS.ids.meal) + '/calendarView' + q).then(function(evs){
+    var byDate = {}, ops = [];
+    evs.forEach(function(e){
+      var d = ((e.start && e.start.dateTime) || '').substr(0, 10);
+      if (!d) return;
+      if (byDate[d]) ops.push(['DELETE', e.id]); else byDate[d] = e;
+    });
+    for (var d = from; d < to; d = addDays(d, 1)) {
+      var ds = ymd(d), m = S.meals[ds], e = byDate[ds];
+      var has = m && ((m.lunch && m.lunch.text) || (m.dinner && m.dinner.text));
+      if (has) {
+        var want = toMealEvent(m);
+        if (!e) ops.push(['POST', want]);
+        else if (norm(e.subject) !== norm(want.subject) || norm(e.body && e.body.content) !== norm(want.body.content)) ops.push(['PATCH', e.id, want]);
+      } else if (e) ops.push(['DELETE', e.id]);
+    }
+    return seq(ops, function(op){
+      if (op[0] === 'POST') return gx('POST', '/me/calendars/' + enc(MSS.ids.meal) + '/events', op[1]);
+      if (op[0] === 'PATCH') return gx('PATCH', '/me/events/' + enc(op[1]), op[2]);
+      return gx('DELETE', '/me/events/' + enc(op[1]));
+    });
+  }).then(function(){ return false; });
+}
 /* Einkaufsliste <-> To Do */
 function htmlToText(s){ return String(s || '').replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').trim(); }
 function taskPath(list, id){ return '/me/todo/lists/' + enc(list) + '/tasks' + (id ? '/' + enc(id) : ''); }
@@ -1637,41 +1767,102 @@ var SYNC_SHOP = {
 /* Notizen <-> To Do */
 var SYNC_NOTES = {
   col:'notes', prefix:'n',
+  /* In To Do abgehakt? Die Notiz bleibt erhalten und wird wieder auf „offen“ gesetzt */
+  forcePush: function(r){ return r.status === 'completed'; },
   list: function(){ return gall(taskPath(MSS.ids.notes) + '?$top=100'); },
   from: function(r, l){
     var body = r.body ? (r.body.contentType === 'html' ? htmlToText(r.body.content) : String(r.body.content || '').trim()) : '';
-    return {title:r.title || '', text:body, pinned:r.importance === 'high', color: l ? l.color : 'gelb'};
+    return {title:r.title || '', text:body, pinned:r.importance === 'high', color: l ? l.color : '', colorAt: l ? (l.colorAt || 0) : 0};
   },
-  create: function(l){ return gx('POST', taskPath(MSS.ids.notes), {title:l.title || 'Notiz', body:{contentType:'text', content:l.text || ''}, importance: l.pinned ? 'high' : 'normal'}); },
-  update: function(l){ return gx('PATCH', taskPath(MSS.ids.notes, l.msId), {title:l.title || 'Notiz', body:{contentType:'text', content:l.text || ''}, importance: l.pinned ? 'high' : 'normal'}); },
+  create: function(l){ return gx('POST', taskPath(MSS.ids.notes), {title:l.title || 'Notiz', body:{contentType:'text', content:l.text || ''}, importance: l.pinned ? 'high' : 'normal', status:'notStarted'}); },
+  update: function(l){ return gx('PATCH', taskPath(MSS.ids.notes, l.msId), {title:l.title || 'Notiz', body:{contentType:'text', content:l.text || ''}, importance: l.pinned ? 'high' : 'normal', status:'notStarted'}); },
   remove: function(t){ return gx('DELETE', taskPath(t.list || MSS.ids.notes, t.msId)); }
 };
-/* Familie, Regelwoche, Arbeitsstatus, Notizfarben -> Datei im OneDrive-App-Ordner */
-function syncCfg(){
-  /* App-Ordner zuerst direkt abfragen: OneDrive legt ihn erst dabei an */
-  var path = '';
+/* Familien-Datei im OneDrive-App-Ordner: Familie & Regelwoche, Arbeitsstatus, Essensplan,
+   einzeln gelöschte Serientermine, Notizfarben und gelernte Einkaufsbereiche.
+   Zusammenführung Eintrag für Eintrag – die jeweils neuere Änderung gewinnt. */
+function stampOf(d){ return (d && typeof d.updated === 'number') ? d.updated : 0; }
+function mergeMap(col, rmap, rgone, flags){
+  rmap = rmap || {}; rgone = rgone || {};
+  var lm = S[col], keys = {}, pre = col + '/';
+  Object.keys(lm).forEach(function(k){ keys[k] = 1; });
+  Object.keys(rmap).forEach(function(k){ keys[k] = 1; });
+  Object.keys(S.gone).concat(Object.keys(rgone)).forEach(function(g){ if (g.indexOf(pre) === 0) keys[g.slice(pre.length)] = 1; });
+  Object.keys(keys).forEach(function(k){
+    var gk = pre + k, ld = lm[k], rd = rmap[k], rg = rgone[gk] || 0;
+    var lt = Math.max(stampOf(ld), S.gone[gk] || 0), rt = Math.max(stampOf(rd), rg);
+    var rstate = (rd && stampOf(rd) >= rg) ? 'doc' : (rg ? 'gone' : 'none');
+    if (rt > lt) {
+      if (rstate === 'doc') { var x = clone(rd); x.id = k; lm[k] = x; delete S.gone[gk]; }
+      else { delete lm[k]; S.gone[gk] = rg; }
+      flags.local = true;
+    } else if (lt > rt || rstate === 'none') {
+      flags.upload = true;
+    }
+  });
+}
+function syncCfg(retry){
+  var path = '', etag = '';
   return gx('GET', '/me/drive/special/approot').then(function(root){
     path = '/me/drive/items/' + enc(root.id) + ':/familienplaner.json';
-    return gx('GET', path);
-  }).then(function(meta){
-    var url = meta && meta['@microsoft.graph.downloadUrl'];
-    return url ? http(url).then(function(r){ return jparse(r.text); }) : gx('GET', path + ':/content');
-  }, function(e){ if (e && e.status === 404) return null; throw e; }).then(function(remote){
-    var local = S.cfgUpdated || 0;
-    if (remote && typeof remote.updated === 'number' && remote.updated > local) {
-      if (Array.isArray(remote.members) && remote.members.length) S.members = sanitizeMembers(remote.members);
-      if (remote.pattern && typeof remote.pattern === 'object') S.pattern = remote.pattern;
-      if (remote.work && typeof remote.work === 'object') S.work = remote.work;
-      if (remote.noteColors) values(S.notes).forEach(function(n){ if (n.msId && remote.noteColors[n.msId]) n.color = remote.noteColors[n.msId]; });
-      S.cfgUpdated = remote.updated;
-      return true;
-    }
-    if (!remote || local > (remote.updated || 0)) {
-      if (!local) S.cfgUpdated = Date.now();
-      var nc = {}; values(S.notes).forEach(function(n){ if (n.msId && n.color) nc[n.msId] = n.color; });
-      return gx('PUT', path + ':/content', {app:'familienplaner', updated:S.cfgUpdated, members:S.members, pattern:S.pattern, work:S.work, noteColors:nc}).then(function(){ return false; });
-    }
-    return false;
+    return gx('GET', path).then(function(meta){
+      etag = (meta && meta.eTag) || '';
+      var url = meta && meta['@microsoft.graph.downloadUrl'];
+      return url ? http(url).then(function(r){ return jparse(r.text); }) : gx('GET', path + ':/content');
+    }, function(e){ if (e && e.status === 404) return null; throw e; });
+  }).then(function(remote){
+    var flags = {local:false, upload:!remote};
+    remote = remote || {};
+    // Familie & Regelwoche (ein Block, neuere Fassung gewinnt)
+    var rc = remote.cfg || (remote.members ? {updated:remote.updated || 0, members:remote.members, pattern:remote.pattern} : null);
+    var lc = S.cfgUpdated || 0;
+    if (rc && (rc.updated || 0) > lc) {
+      if (Array.isArray(rc.members) && rc.members.length) S.members = sanitizeMembers(rc.members);
+      if (rc.pattern && typeof rc.pattern === 'object') S.pattern = rc.pattern;
+      S.cfgUpdated = rc.updated; flags.local = true;
+    } else if (!rc || lc > (rc.updated || 0)) flags.upload = true;
+    // Arbeitsstatus und Essensplan, Tag für Tag
+    mergeMap('work', remote.work, remote.gone, flags);
+    mergeMap('meals', remote.meals, remote.gone, flags);
+    // Einzeln gelöschte Termine von Serien
+    var rsk = remote.skips || {};
+    values(S.events).forEach(function(ev){
+      if (!ev.msId) return;
+      var r = Array.isArray(rsk[ev.msId]) ? rsk[ev.msId] : [], l = Array.isArray(ev.skip) ? ev.skip : [], u = l.slice();
+      r.forEach(function(d){ if (u.indexOf(d) < 0) u.push(d); });
+      if (u.length > l.length) {
+        ev.skip = u; var ms = Array.isArray(ev.msSkip) ? ev.msSkip.slice() : [];
+        r.forEach(function(d){ if (ms.indexOf(d) < 0) ms.push(d); }); ev.msSkip = ms; flags.local = true;
+      }
+      if (l.some(function(d){ return r.indexOf(d) < 0; })) flags.upload = true;
+    });
+    // Notizfarben
+    var rnc = remote.noteColors || {};
+    values(S.notes).forEach(function(n){
+      if (!n.msId) return;
+      var r = rnc[n.msId];
+      if (r && typeof r === 'object' && r.c !== n.color && (!n.color || r.t > (n.colorAt || 0))) { n.color = r.c; n.colorAt = r.t; flags.local = true; }
+      else if (n.color && (!r || typeof r !== 'object' || r.c !== n.color)) flags.upload = true;
+    });
+    // Gelernte Einkaufsbereiche
+    var rcats = remote.cats || {}, lcats = loadCatMem(), cch = false;
+    Object.keys(rcats).forEach(function(k){ if (!lcats[k]) { lcats[k] = rcats[k]; cch = true; } });
+    if (cch) { try { localStorage.setItem(CAT_KEY, JSON.stringify(lcats)); } catch (e) {} }
+    if (Object.keys(lcats).some(function(k){ return rcats[k] !== lcats[k]; })) flags.upload = true;
+    // Alte Lösch-Markierungen nach 90 Tagen vergessen
+    var cut = Date.now() - 90 * 86400000;
+    Object.keys(S.gone).forEach(function(g){ if (S.gone[g] < cut) delete S.gone[g]; });
+    if (!flags.upload) return flags.local;
+    if (!S.cfgUpdated) S.cfgUpdated = Date.now();
+    var skips = {}, nc = {};
+    values(S.events).forEach(function(ev){ if (ev.msId && Array.isArray(ev.skip) && ev.skip.length) skips[ev.msId] = ev.skip; });
+    values(S.notes).forEach(function(n){ if (n.msId && n.color) nc[n.msId] = {c:n.color, t:n.colorAt || 0}; });
+    var body = {app:'familienplaner', version:2, cfg:{updated:S.cfgUpdated, members:S.members, pattern:S.pattern},
+      work:S.work, meals:S.meals, gone:S.gone, skips:skips, noteColors:nc, cats:lcats};
+    return gx('PUT', path + ':/content', body, etag ? {'If-Match':etag} : undefined).then(function(){ return flags.local; }, function(e){
+      if (e && e.status === 412 && !retry) return syncCfg(true).then(function(c){ return c || flags.local; });
+      throw e;
+    });
   });
 }
 
@@ -1705,7 +1896,6 @@ function msSync(manual){
     .then(step('Termine', function(){ return syncCol(SYNC_EVENTS); }))
     .then(step('Einkaufsliste', function(){ return syncCol(SYNC_SHOP); }))
     .then(step('Notizen', function(){ return syncCol(SYNC_NOTES); }))
-    .then(step('Essensplan', function(){ return syncCol(SYNC_MEALS); }))
     .then(function(){
       /* Familien-Datei im OneDrive: ein Fehler hier stoppt den übrigen Abgleich nicht */
       return syncCfg().then(function(c){ mark(c); MS.cfgError = ''; }, function(e){
@@ -1713,6 +1903,7 @@ function msSync(manual){
         MS.cfgError = (e && e.msg) || 'unbekannter Fehler';
       });
     })
+    .then(step('Essensplan', syncMealsOut))
     .then(function(){ MSS.last = Date.now(); MS.lastError = ''; saveMS(); setSync('ms-ok'); if (manual) toast(MS.cfgError ? 'Abgleich fertig – Familien-Datei im OneDrive nicht möglich' : 'Abgleich fertig'); },
       function(e){
         if (e && e.auth) { msAuthProblem(); return; }
@@ -1728,9 +1919,9 @@ function msSync(manual){
       if (MS.again) { MS.again = false; msChanged(); }
     });
 }
-setInterval(function(){ if (MS.active && document.visibilityState !== 'hidden') msSync(); }, 5 * 60000);
+setInterval(function(){ if (MS.active && document.visibilityState !== 'hidden') msSync(); }, 60000);
 document.addEventListener('visibilitychange', function(){
-  if (document.visibilityState === 'visible' && MS.active && Date.now() - (MSS.last || 0) > 60000) msSync();
+  if (document.visibilityState === 'visible' && MS.active && Date.now() - (MSS.last || 0) > 20000) msSync();
 });
 function msSettingsHtml(){
   if (db) return '<h4>Microsoft-Sync</h4><div class="infobox">Der Abgleich mit Outlook und Microsoft To Do funktioniert nur, wenn die App auf einer eigenen Webadresse läuft (siehe Einrichtungsanleitung). Innerhalb von claude.ai sind Verbindungen zu Microsoft gesperrt.</div>';
@@ -1738,7 +1929,7 @@ function msSettingsHtml(){
   var n = MSS.names;
   var st = MSS.tok ? 'Verbunden. ' + (MSS.last ? 'Letzter Abgleich: ' + new Date(MSS.last).toLocaleString('de-DE') + '.' : '') : 'Nicht angemeldet.';
   if (MS.lastError) st += ' Letzter Fehler – ' + MS.lastError;
-  if (MS.cfgError) st += ' Hinweis: Familie, Farben und Arbeitsstatus konnten nicht im OneDrive gespeichert werden (' + MS.cfgError + '). Termine, Listen und Notizen werden trotzdem abgeglichen.';
+  if (MS.cfgError) st += ' Hinweis: Die Familien-Datei im OneDrive (Familie, Arbeitsstatus, Essensplan) konnte nicht abgeglichen werden (' + MS.cfgError + '). Termine, Einkauf und Notizen laufen trotzdem.';
   var tsel = [['consumers','Privates Microsoft-Konto (outlook.de, hotmail …)'],['common','Privat- oder Arbeitskonto'],['organizations','Nur Arbeits-/Schulkonto']].map(function(o){ return '<option value="' + o[0] + '"' + (msTenant() === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('');
   return '<h4>Microsoft-Sync (Outlook &amp; To Do)</h4><div class="infobox">' + esc(st) + '</div>' +
     field('Anwendungs-ID (Client-ID) aus Azure', '<input class="inp" id="ms-client" type="text" autocapitalize="off" autocorrect="off" value="' + esc(msClientId()) + '" placeholder="z. B. 1a2b3c4d-…">') +
@@ -1800,6 +1991,13 @@ $('shopForm').addEventListener('submit', function(e){
   e.preventDefault();
   if (addShop($('shopInput').value, $('shopQty').value)) { $('shopInput').value = ''; $('shopQty').value = ''; }
   $('shopInput').focus();
+});
+
+/* Drehen / Fenstergröße: neu zeichnen */
+var resizeTimer;
+window.addEventListener('resize', function(){
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function(){ setSync(syncState); if (!modalHandlers) render(); }, 200);
 });
 
 /* Tageswechsel (z. B. iPad läuft dauerhaft an der Wand) */
