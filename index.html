@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-title" content="Familie">
+<meta name="theme-color" id="themeColor" content="#edf3fa">
 <title>Familienplaner</title>
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-180.png">
@@ -77,6 +78,7 @@ body.dark .btn.primary{color:#0d1626}
 .wbadge.office{background:#e6eef8;border-style:solid;border-color:#c6d6ec}
 .wbadge.home{background:#e7f4ea;border-style:solid;border-color:#c5e2cc}
 .wbadge.off{background:#fdf0dc;border-style:solid;border-color:#f0d6ae}
+.wbadge.sick{background:#fbe3e3;border-style:solid;border-color:#efc2c2}
 .wbadge:only-child:not(.office):not(.home):not(.off){padding-left:10px;color:var(--muted)}
 .wbadge .wt{color:var(--muted);margin-left:5px}
 
@@ -182,6 +184,52 @@ select.inp{background:var(--input) url("data:image/svg+xml;utf8,<svg xmlns='http
 #toast{position:fixed;left:50%;bottom:104px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:12px;font-size:16px;z-index:70;opacity:0;-webkit-transition:opacity .25s;transition:opacity .25s;pointer-events:none;max-width:90%;text-align:center}
 #toast.show{opacity:1}
 main{overflow-x:hidden}
+/* iPhone/iPad als Web-App: Kopfzeile unter die Unschärfe-Zone am oberen Rand rücken */
+body.standalone header{padding-top:42px}
+
+/* Geburtstage, Kinderwochenende, Müll */
+.tag.bd{background:rgba(240,143,154,.2);color:#b03a52}
+body.dark .tag.bd{color:#f5a3ad}
+.tag.kids{background:rgba(155,111,208,.15);color:#6b4ba3;font-weight:600}
+body.dark .tag.kids{color:#c6aef0}
+.tag.trash{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:500;padding:2px 8px}
+.tag.trash i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}
+.day-row.kids .day-head{border-right:3px solid #b9a2e3}
+.mcell.kids{box-shadow:inset 0 -3px 0 #b9a2e3}
+.mcake{font-size:12px;margin-left:1px}
+.mlabel.bd{color:#b03a52}
+.mtrash{margin:2px 3px 0}
+.mtrash i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:2px}
+.bd-next{background:var(--cream);border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink);border-radius:20px;padding:16px 18px;margin:4px 0 14px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
+.bd-next .big{font-size:44px;margin-right:14px}
+.bd-next b{display:block;font-size:20px}
+.bd-next span{color:var(--muted);font-size:15px}
+.bd-row{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:6px;padding:10px 12px;min-height:56px}
+.bd-row.today{border-color:var(--heart);box-shadow:0 0 0 1px var(--heart)}
+.bd-date{width:62px;-webkit-flex:none;flex:none;text-align:center;color:var(--muted);font-size:13px;line-height:1.1}
+.bd-date b{display:block;font-size:22px;color:var(--ink)}
+.bd-name{-webkit-flex:1;flex:1;min-width:0;font-size:17px;font-weight:600}
+.bd-name small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.bd-in{-webkit-flex:none;flex:none;font-size:14px;color:var(--muted);margin-left:8px}
+.bd-row.today .bd-in{color:var(--heart);font-weight:700}
+
+/* Einstellungen */
+.set-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:12px}
+.set-row{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;width:100%;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;padding:12px 14px;min-height:58px;font-size:17px}
+.set-row:last-child{border-bottom:0}
+.set-row .si{font-size:22px;width:34px;-webkit-flex:none;flex:none}
+.set-row .st{-webkit-flex:1;flex:1;min-width:0}
+.set-row .st small{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-row .chev{color:var(--ph);font-size:22px;margin-left:8px}
+.back{border:0;background:none;color:var(--accent);font-size:16px;font-weight:600;padding:4px 0;margin:0 0 6px;min-height:36px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+.box h5{margin:0 0 8px;font-size:16px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
+.box h5 i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:8px}
+.preview{font-size:13px;color:var(--muted);margin-top:4px}
+.exp-sum{font-size:16px;margin:10px 0}
+.exp-list{max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 10px;font-size:14px}
+.exp-list div{padding:5px 0;border-bottom:1px solid var(--line)}
+.exp-list div:last-child{border-bottom:0}
 
 /* ---------- Kleine Tablets ---------- */
 @media (max-width:700px){
@@ -271,7 +319,9 @@ main{overflow-x:hidden}
   .actions .btn{-webkit-flex:1 1 auto;flex:1 1 auto}
 
   /* Tabs */
-  #tabs button{min-height:56px;font-size:11px;padding:6px 0 8px}
+  #tabs button{min-height:56px;font-size:10px;padding:6px 0 8px;letter-spacing:-.2px}
+  body.standalone header{padding-top:40px}
+  .bd-next .big{font-size:34px}
   #tabs .ti{font-size:22px}
   .fab{right:16px;bottom:76px;width:58px;height:58px;line-height:58px;font-size:30px}
 }
@@ -285,6 +335,7 @@ main{overflow-x:hidden}
 body.dark .wbadge.office{background:#1e2c3b;border-color:#2f4560}
 body.dark .wbadge.home{background:#1d3024;border-color:#2e4a37}
 body.dark .wbadge.off{background:#3a2d17;border-color:#5a4523}
+body.dark .wbadge.sick{background:#3d1f24;border-color:#653139}
 body.dark .seg button.on{background:var(--accent);color:#fff}
 body.dark .wseg button.on{background:var(--accent);border-color:var(--accent)}
 body.dark .chip.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
@@ -402,6 +453,10 @@ body.dark .mlabel.fer{color:#d8bb62}
     <section id="v-notes" class="view">
       <div id="notesBody"></div>
     </section>
+
+    <section id="v-bday" class="view">
+      <div id="bdayBody"></div>
+    </section>
   </main>
 
   <nav id="tabs">
@@ -410,6 +465,7 @@ body.dark .mlabel.fer{color:#d8bb62}
     <button data-act="tab" data-tab="shop"><span class="ti">&#128722;</span>Einkauf</button>
     <button data-act="tab" data-tab="meal"><span class="ti">&#127869;</span>Essen</button>
     <button data-act="tab" data-tab="notes"><span class="ti">&#128221;</span>Notizen</button>
+    <button data-act="tab" data-tab="bday"><span class="ti">&#127874;</span>Geburtstage</button>
   </nav>
 </div>
 
@@ -425,7 +481,23 @@ body.dark .mlabel.fer{color:#d8bb62}
 var STORE_KEY = 'familienplaner-v1';
 var FREQ_KEY = 'familienplaner-freq';
 var UI_KEY = 'familienplaner-ui';
-var COLS = ['events', 'shopping', 'meals', 'notes', 'work'];
+var COLS = ['events', 'shopping', 'meals', 'notes', 'work', 'birthdays'];
+var GONE_COLS = {work:1, meals:1, birthdays:1};
+var TRASH = [['paper','Papier','#2f6fdc'], ['rest','Restmüll','#59606b'], ['bio','Biomüll','#8a5a2b'], ['yellow','Gelbe Tonne','#e0b400']];
+function defaultExtra(){
+  return {kids:{on:false, label:'Kinderwochenende', start:5, end:0, parity:'even', anchor:''},
+    trash:{paper:{on:false, every:4, first:'', add:'', skip:''}, rest:{on:false, every:2, first:'', add:'', skip:''},
+      bio:{on:false, every:2, first:'', add:'', skip:''}, yellow:{on:false, every:2, first:'', add:'', skip:''}}};
+}
+function mergeExtra(x){
+  var d = defaultExtra();
+  if (!x || typeof x !== 'object') return d;
+  if (x.kids && typeof x.kids === 'object') Object.keys(d.kids).forEach(function(k){ if (k in x.kids) d.kids[k] = x.kids[k]; });
+  if (x.trash && typeof x.trash === 'object') Object.keys(d.trash).forEach(function(t){
+    var src = x.trash[t]; if (src && typeof src === 'object') Object.keys(d.trash[t]).forEach(function(k){ if (k in src) d.trash[t][k] = src[k]; });
+  });
+  return d;
+}
 var DEFAULT_MEMBERS = [
   {id:'m1', name:'Anja', color:'#e8798f', adult:true},
   {id:'m2', name:'Thorgen', color:'#3e7cc4', adult:true},
@@ -442,7 +514,7 @@ var MON = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','D
 var MON_LONG = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 var REPEATS = [['none','Keine'],['daily','Täglich'],['weekdays','Werktags (Mo–Fr)'],['weekly','Jede Woche'],['biweekly','Alle 2 Wochen'],['monthly','Jeden Monat'],['yearly','Jedes Jahr (z. B. Geburtstag)']];
 var REPEAT_SHORT = {daily:'tägl.', weekdays:'Mo–Fr', weekly:'wöchentl.', biweekly:'14-tägig', monthly:'monatl.', yearly:'jährl.'};
-var WORK = {office:{label:'Büro', icon:'🏢'}, home:{label:'Homeoffice', short:'HO', icon:'🏠'}, off:{label:'Frei', icon:'🌴'}};
+var WORK = {office:{label:'Arbeit', icon:'\uD83D\uDCBC'}, home:{label:'Homeoffice', short:'HO', icon:'🏠'}, off:{label:'Frei', icon:'🌴'}, sick:{label:'Krank', icon:'\uD83E\uDD12'}};
 var SLOTS = {lunch:'Mittagessen', dinner:'Abendessen'};
 var CAT_KEY = 'familienplaner-cats';
 var CATS = [
@@ -473,7 +545,7 @@ var FERIEN = [
 ];
 
 /* ---------- Zustand ---------- */
-var S = {members: clone(DEFAULT_MEMBERS), pattern: {}, events:{}, shopping:{}, meals:{}, notes:{}, work:{}, gone:{}};
+var S = {members: clone(DEFAULT_MEMBERS), pattern: {}, extra: defaultExtra(), events:{}, shopping:{}, meals:{}, notes:{}, work:{}, birthdays:{}, gone:{}};
 var UI = {tab:'today', calMode:'week', calRef:today(), mealRef:today(), filter:[]};
 var PREFS = {theme:'auto', big:false, hol:true, ferien:true, karneval:true};
 var db = null;
@@ -526,6 +598,7 @@ function loadCache(){
         if (d.pattern && typeof d.pattern === 'object') S.pattern = d.pattern;
         if (typeof d.cfgUpdated === 'number') S.cfgUpdated = d.cfgUpdated;
         if (d.gone && typeof d.gone === 'object') S.gone = d.gone;
+        if (d.extra) S.extra = mergeExtra(d.extra);
         COLS.forEach(function(c){ if (d[c] && typeof d[c] === 'object') S[c] = d[c]; });
       }
     }
@@ -571,16 +644,92 @@ function ferienOn(ds){
   for (var i = 0; i < FERIEN.length; i++) if (ds >= FERIEN[i][0] && ds <= FERIEN[i][1]) return FERIEN[i][2];
   return '';
 }
+/* ---------- Geburtstage ---------- */
+function bdList(){ return values(S.birthdays).filter(function(b){ return b && b.name && /^\d{4}-\d{2}-\d{2}$/.test(b.date || ''); }); }
+function bdDateIn(b, y){
+  var m = +b.date.substr(5, 2) - 1, d = +b.date.substr(8, 2), dt = new Date(y, m, d);
+  if (dt.getMonth() !== m) dt = new Date(y, m + 1, 0);   /* 29.2. in Nicht-Schaltjahren -> 28.2. */
+  return dt;
+}
+function nextBd(b, from){ var dt = bdDateIn(b, from.getFullYear()); if (dt < from) dt = bdDateIn(b, from.getFullYear() + 1); return dt; }
+function bdAge(b, on){ var y = +b.date.substr(0, 4); return y > 1900 ? on.getFullYear() - y : null; }
+function birthdaysOn(ds){ var d = parse(ds); return bdList().filter(function(b){ return ymd(bdDateIn(b, d.getFullYear())) === ds; }); }
+function bdText(b, on){ var a = bdAge(b, on); return esc(b.name) + (a !== null && a > 0 ? ' (' + a + ')' : ''); }
+
+/* ---------- Kinderwochenende (fester 14-Tage-Rhythmus) ---------- */
+function kidsAnchor(k){
+  var ref = k.anchor ? parse(k.anchor) : today();
+  ref = weekStart(ref);
+  var s = addDays(ref, (k.start - ref.getDay() + 7) % 7);
+  if ((isoWeek(s) % 2 === 0) !== (k.parity === 'even')) s = addDays(s, 7);
+  return s;
+}
+function kidsOn(ds){
+  var k = S.extra && S.extra.kids;
+  if (!k || !k.on) return false;
+  var d = parse(ds), back = (d.getDay() - k.start + 7) % 7, len = (k.end - k.start + 7) % 7;
+  if (back > len) return false;
+  var diff = dayDiff(ymd(kidsAnchor(k)), ymd(addDays(d, -back)));
+  return ((diff % 14) + 14) % 14 === 0;
+}
+function nextKids(n){
+  var out = [], k = S.extra.kids, d = today();
+  for (var i = 0; i < 120 && out.length < n; i++, d = addDays(d, 1)) {
+    var ds = ymd(d);
+    if (d.getDay() === k.start && kidsOn(ds)) out.push(d);
+  }
+  return out;
+}
+
+/* ---------- Müllabfuhr ---------- */
+var dateListCache = {};
+function parseDates(s){
+  s = String(s || '');
+  if (dateListCache[s]) return dateListCache[s];
+  var r = s.split(/[\s,;]+/).map(function(x){
+    var m = x.match(/^(\d{1,2})\.(\d{1,2})\.(\d{2,4})$/);
+    if (!m) return '';
+    var y = +m[3]; if (y < 100) y += 2000;
+    return y + '-' + pad(+m[2]) + '-' + pad(+m[1]);
+  }).filter(Boolean);
+  dateListCache[s] = r;
+  return r;
+}
+function trashOn(ds){
+  var out = [], t = (S.extra && S.extra.trash) || {};
+  TRASH.forEach(function(x){
+    var c = t[x[0]];
+    if (!c || !c.on) return;
+    var hit = false, n = 7 * (+c.every || 0);
+    if (c.first && n > 0) { var diff = dayDiff(c.first, ds); hit = ((diff % n) + n) % n === 0; }
+    if (parseDates(c.add).indexOf(ds) >= 0) hit = true;
+    if (parseDates(c.skip).indexOf(ds) >= 0) hit = false;
+    if (hit) out.push(x);
+  });
+  return out;
+}
+function nextTrash(key, n){
+  var out = [], d = today();
+  for (var i = 0; i < 200 && out.length < n; i++, d = addDays(d, 1)) {
+    if (trashOn(ymd(d)).some(function(x){ return x[0] === key; })) out.push(d);
+  }
+  return out;
+}
+
 function dayTags(ds){
-  var h = holidayOn(ds), f = ferienOn(ds), t = '';
+  var h = holidayOn(ds), f = ferienOn(ds), t = '', d = parse(ds);
   if (h) t += '<span class="tag ' + (h.off ? 'hol' : 'info') + '">' + (h.kind === 'karneval' ? '\uD83C\uDFAD ' : (h.off ? '\uD83D\uDCC5 ' : '')) + esc(h.name) + '</span>';
   if (f) t += '<span class="tag fer">\uD83C\uDF92 ' + esc(f) + '</span>';
+  birthdaysOn(ds).forEach(function(b){ t += '<span class="tag bd">\uD83C\uDF82 ' + bdText(b, d) + '</span>'; });
+  if (kidsOn(ds)) t += '<span class="tag kids">' + esc(S.extra.kids.label || 'Kinderwochenende') + '</span>';
+  trashOn(ds).forEach(function(x){ t += '<span class="tag trash"><i style="background:' + x[2] + '"></i>' + x[1] + '</span>'; });
   return t ? '<div class="day-tags">' + t + '</div>' : '';
 }
 function dayClasses(ds){
   var h = holidayOn(ds), c = '';
   if (h && h.off) c += ' holiday';
   if (ferienOn(ds)) c += ' ferien';
+  if (kidsOn(ds)) c += ' kids';
   return c;
 }
 
@@ -592,7 +741,7 @@ function isDark(){
   return hr >= 21 || hr < 6;
 }
 function applyTheme(){
-  var cls = (isDark() ? 'dark' : '') + (PREFS.big ? ' big' : '');
+  var cls = (isDark() ? 'dark' : '') + (PREFS.big ? ' big' : '') + (/standalone/.test(document.documentElement.className) ? ' standalone' : '');
   if (document.body.className !== cls) document.body.className = cls;
 }
 
@@ -643,7 +792,7 @@ function put(col, obj){
   var prev = S[col][obj.id];
   if (prev) ['msId','msMod','msSync','msSkip','msReadOnly','colorAt'].forEach(function(k){ if (!(k in obj) && (k in prev)) obj[k] = prev[k]; });
   obj.updated = Date.now();
-  if (col === 'work' || col === 'meals') delete S.gone[col + '/' + obj.id];
+  if (GONE_COLS[col]) delete S.gone[col + '/' + obj.id];
   S[col][obj.id] = obj;
   msChanged();
   persist();
@@ -656,7 +805,7 @@ function put(col, obj){
 function del(col, id){
   var old = S[col][id];
   if (old && old.msId && MS_COLS[col]) { MSS.tomb.push({col:col, msId:old.msId, list:MSS.ids[MS_COLS[col]] || ''}); saveMS(); }
-  if (col === 'work' || col === 'meals') S.gone[col + '/' + id] = Date.now();
+  if (GONE_COLS[col]) S.gone[col + '/' + id] = Date.now();
   delete S[col][id];
   msChanged();
   persist();
@@ -669,7 +818,7 @@ function putConfig(){
   persist();
   render();
   if (db) {
-    var body = {members: clone(S.members), pattern: clone(S.pattern), updated: Date.now()};
+    var body = {members: clone(S.members), pattern: clone(S.pattern), extra: clone(S.extra), updated: Date.now()};
     enqueue('config/family', function(){ return db.doc('config/family').set(body); }).catch(writeErr);
   }
 }
@@ -745,6 +894,7 @@ function subscribe(){
       var d = snap.data() || {};
       if (Array.isArray(d.members) && d.members.length) S.members = sanitizeMembers(d.members);
       if (d.pattern && typeof d.pattern === 'object') S.pattern = clone(d.pattern);
+      if (d.extra) S.extra = mergeExtra(d.extra);
     }
     mark('config', snap.metadata);
     persist();
@@ -834,19 +984,21 @@ function render(){
   var t = today();
   $('todayLine').textContent = narrow() ? DOW[t.getDay()] + ', ' + t.getDate() + '. ' + MON[t.getMonth()] + ' · KW ' + isoWeek(t) : fmtLong(t) + ' ' + t.getFullYear() + ' · KW ' + isoWeek(t);
   applyTheme();
-  var titles = {today:'Familienplaner', cal:'Kalender', shop:'Einkaufsliste', meal:'Essensplan', notes:'Notizen'};
+  var titles = {today:'Familienplaner', cal:'Kalender', shop:'Einkaufsliste', meal:'Essensplan', notes:'Notizen', bday:'Geburtstage'};
   if (!titles[UI.tab]) UI.tab = 'today';
   $('viewTitle').textContent = titles[UI.tab];
-  ['today','cal','shop','meal','notes'].forEach(function(k){
+  ['today','cal','shop','meal','notes','bday'].forEach(function(k){
     $('v-' + k).className = 'view' + (UI.tab === k ? ' active' : '');
   });
   var tb = document.querySelectorAll('#tabs button');
   for (var i = 0; i < tb.length; i++) tb[i].className = tb[i].getAttribute('data-tab') === UI.tab ? 'on' : '';
   $('fab').className = 'fab' + (UI.tab === 'meal' || UI.tab === 'shop' ? ' hidden' : '');
+  var tc = $('themeColor'); if (tc) tc.setAttribute('content', isDark() ? '#0d1626' : '#edf3fa');
   if (UI.tab === 'today') renderToday();
   else if (UI.tab === 'cal') renderCal();
   else if (UI.tab === 'shop') renderShop();
   else if (UI.tab === 'meal') renderMeals();
+  else if (UI.tab === 'bday') renderBirthdays();
   else renderNotes();
 }
 
@@ -863,6 +1015,11 @@ function renderToday(){
   function evs(d){ var l = eventsOn(d, false); return l.length ? l.map(function(ev){ return evChip(ev, d); }).join('') : '<span class="empty">Keine Termine</span>'; }
   html += tcard('Heute', 'cal', evs(ds));
   html += tcard('Morgen · ' + DOW_LONG[tmD.getDay()], 'cal', dayTags(tm) + evs(tm));
+  var upc = bdList().map(function(b){ return {b:b, d:nextBd(b, t)}; }).filter(function(x){ return dayDiff(ds, ymd(x.d)) <= 30; }).sort(function(a, b){ return a.d - b.d; }).slice(0, 4);
+  if (upc.length) html += tcard('Geburtstage', 'bday', '<ul class="tlist">' + upc.map(function(x){
+    var n = dayDiff(ds, ymd(x.d)), a = bdAge(x.b, x.d);
+    return '<li>\uD83C\uDF82<span style="margin-left:8px">' + esc(x.b.name) + (a !== null && a > 0 ? ' wird ' + a : '') + '</span><span class="qtyl" style="margin-left:auto">' + (n === 0 ? 'heute \uD83C\uDF89' : (n === 1 ? 'morgen' : 'in ' + n + ' Tagen')) + '</span></li>';
+  }).join('') + '</ul>');
   if (adults().length) {
     var wl = adults().map(function(m){
       var w = workFor(m.id, ds), s = w && WORK[w.s] ? w.s : '';
@@ -946,8 +1103,10 @@ function renderMonth(){
   for (var d = start; d <= end; d = addDays(d, 1)) {
     var ds = ymd(d), evs = eventsOn(ds, true);
     var cls = 'mcell' + (d.getMonth() !== ref.getMonth() ? ' other' : '') + (ds === td ? ' today' : '') + dayClasses(ds);
-    html += '<div class="' + cls + '" data-act="month-day" data-date="' + ds + '"><span class="mnum">' + d.getDate() + '</span>';
+    var bds = birthdaysOn(ds);
+    html += '<div class="' + cls + '" data-act="month-day" data-date="' + ds + '"><span class="mnum">' + d.getDate() + '</span>' + (bds.length ? '<span class="mcake">\uD83C\uDF82</span>' : '');
     var hol = holidayOn(ds);
+    if (bds.length) html += '<div class="mlabel bd">' + esc(bds.map(function(b){ return b.name; }).join(', ')) + '</div>';
     if (hol) html += '<div class="mlabel">' + esc(hol.name) + '</div>';
     else { var fe = ferienOn(ds); if (fe && (ds === ymd(start) || parse(ds).getDay() === 1 || ferienOn(ymd(addDays(d, -1))) !== fe)) html += '<div class="mlabel fer">' + esc(fe) + '</div>'; }
     evs.slice(0, 3).forEach(function(ev){
@@ -955,6 +1114,8 @@ function renderMonth(){
       html += '<div class="mev" style="background:' + evColor(ev) + '">' + esc(t + ev.title) + '</div>';
     });
     if (evs.length > 3) html += '<div class="more">+' + (evs.length - 3) + ' weitere</div>';
+    var tr = trashOn(ds);
+    if (tr.length) html += '<div class="mtrash">' + tr.map(function(x){ return '<i style="background:' + x[2] + '" title="' + x[1] + '"></i>'; }).join('') + '</div>';
     html += '</div>';
   }
   html += '</div>';
@@ -1021,6 +1182,26 @@ function renderMeals(){
     html += '</div></div>';
   }
   $('mealBody').innerHTML = html;
+}
+
+function renderBirthdays(){
+  var t = today(), ds = ymd(t);
+  var list = bdList().map(function(b){ return {b:b, d:nextBd(b, t)}; }).sort(function(a, b){ return a.d - b.d; });
+  if (!list.length) { $('bdayBody').innerHTML = '<div class="empty-state">Noch keine Geburtstage eingetragen.<br><br><button class="btn primary" data-act="bday-edit">Geburtstage eintragen</button></div>'; return; }
+  var nx = list[0], nn = dayDiff(ds, ymd(nx.d)), na = bdAge(nx.b, nx.d);
+  var html = '<div class="bd-next"><span class="big">\uD83C\uDF82</span><div><span>Als Nächstes</span><b>' + esc(nx.b.name) + (na !== null && na > 0 ? ' wird ' + na : '') + '</b><span>' +
+    DOW_LONG[nx.d.getDay()] + ', ' + nx.d.getDate() + '. ' + MON_LONG[nx.d.getMonth()] + ' · ' + (nn === 0 ? 'heute \uD83C\uDF89' : (nn === 1 ? 'morgen' : 'in ' + nn + ' Tagen')) + '</span></div></div>';
+  var cur = -1;
+  list.forEach(function(x){
+    var key = x.d.getFullYear() * 12 + x.d.getMonth();
+    if (key !== cur) { cur = key; html += '<div class="cat-title">' + MON_LONG[x.d.getMonth()] + ' ' + x.d.getFullYear() + '</div>'; }
+    var n = dayDiff(ds, ymd(x.d)), a = bdAge(x.b, x.d);
+    html += '<div class="bd-row' + (n === 0 ? ' today' : '') + '"><div class="bd-date"><b>' + x.d.getDate() + '.</b>' + MON[x.d.getMonth()] + '</div>' +
+      '<div class="bd-name">' + esc(x.b.name) + '<small>' + DOW_LONG[x.d.getDay()] + (a !== null && a > 0 ? ' · wird ' + a : '') + '</small></div>' +
+      '<div class="bd-in">' + (n === 0 ? 'Heute \uD83C\uDF89' : (n === 1 ? 'Morgen' : 'in ' + n + ' T.')) + '</div></div>';
+  });
+  html += '<div class="actions"><span class="grow"></span><button class="btn" data-act="bday-edit">\u270E Geburtstage bearbeiten</button></div>';
+  $('bdayBody').innerHTML = html;
 }
 
 function renderNotes(){
@@ -1292,38 +1473,146 @@ function openNote(id){
   }, function(){ if (!n) setTimeout(function(){ try { $('f-ntitle').focus(); } catch (x) {} }, 50); });
 }
 
-function openSettings(){
-  var rows = S.members.map(function(m, i){
-    var sw = COLORS.map(function(c){ return '<button type="button" class="sw' + (c === m.color ? ' on' : '') + '" data-act="m-color" data-i="' + i + '" data-c="' + c + '" style="background:' + c + '"></button>'; }).join('');
-    return '<div class="mem-row" id="mr' + i + '" data-color="' + safeColor(m.color) + '"><div class="mem-top"><span class="av" id="mav' + i + '" style="background:' + safeColor(m.color) + '">' + esc(initials(m.name)) + '</span>' +
-      '<input class="inp" id="mn' + i + '" type="text" value="' + esc(m.name) + '">' +
-      '<label class="check-row" style="margin:0"><input type="checkbox" id="ma' + i + '"' + (m.adult ? ' checked' : '') + '> Erwachsen</label></div>' +
-      '<div class="swatches">' + sw + '</div></div>';
-  }).join('');
-  var info = {
-    ok: 'Die Daten liegen sicher in deinem Claude-Konto und erscheinen auf jedem Gerät, auf dem diese Seite mit deinem Konto geöffnet ist.',
+/* ---------- Einstellungen (Übersicht mit Unterseiten) ---------- */
+var WD_NAMES = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+function fmtD(d){ return pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.' + d.getFullYear(); }
+function wdSelect(id, val){ return '<select class="inp" id="' + id + '">' + [1,2,3,4,5,6,0].map(function(i){ return '<option value="' + i + '"' + (+val === i ? ' selected' : '') + '>' + WD_NAMES[i] + '</option>'; }).join('') + '</select>'; }
+function setRow(p, icon, title, sub){ return '<button class="set-row" data-act="m-page" data-p="' + p + '"><span class="si">' + icon + '</span><span class="st">' + title + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</span><span class="chev">›</span></button>'; }
+function backBtn(){ return '<button class="back" data-act="m-page" data-p="main">‹ Einstellungen</button>'; }
+function syncInfo(){
+  return {
+    ok: 'Die Daten liegen in deinem Claude-Konto und erscheinen auf jedem Gerät, auf dem diese Seite mit deinem Konto geöffnet ist.',
     connecting: 'Verbindung wird aufgebaut …',
     stale: 'Der Cloud-Speicher ist gerade nicht erreichbar. Angezeigt wird der zuletzt bekannte Stand.',
     error: 'Die Verbindung zum Cloud-Speicher wurde unterbrochen. Bitte die Seite neu laden.',
-    local: 'Die Daten werden in diesem Browser gespeichert. Mit dem Microsoft-Sync (unten) werden sie zusätzlich mit Outlook und Microsoft To Do abgeglichen.'
+    local: 'Die Daten werden in diesem Browser gespeichert. Mit dem Microsoft-Sync werden sie zusätzlich mit Outlook und Microsoft To Do abgeglichen.'
   }[syncState] || ('Die Daten liegen in diesem Browser und werden mit Outlook und Microsoft To Do abgeglichen.' + (MSS.last ? ' Letzter Abgleich: ' + new Date(MSS.last).toLocaleString('de-DE') + '.' : ''));
-  var html = '<h2>Einstellungen</h2><h4>Familie</h4>' + rows +
-    '<div class="hint" style="margin:4px 0 12px">„Erwachsen“ blendet die Arbeitsstatus-Leiste (Büro / Homeoffice / frei) im Wochenkalender ein.</div>' +
-    '<div class="actions"><span class="grow"></span><button class="btn primary" data-act="m-save">Namen &amp; Farben speichern</button></div>' +
-    '<h4>Darstellung</h4><div class="lbl">Farbschema</div><div class="wseg" id="p-theme">' +
-      [['light','\u2600\uFE0F Hell'],['dark','\uD83C\uDF19 Dunkel'],['auto','\uD83D\uDD70 Automatisch (21–6 Uhr dunkel)']].map(function(o){ return '<button type="button" class="' + (PREFS.theme === o[0] ? 'on' : '') + '" data-act="m-pref" data-k="theme" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
-    '<div class="lbl">Schriftgröße</div><div class="wseg" id="p-big">' +
+}
+function settingsHtml(page){
+  var ex = S.extra, html = '';
+  if (page === 'main') {
+    var kids = ex.kids.on ? WD_NAMES[ex.kids.start].substr(0, 2) + '–' + WD_NAMES[ex.kids.end].substr(0, 2) + ', ' + (ex.kids.parity === 'even' ? 'gerade' : 'ungerade') + ' KW' : 'aus';
+    var tr = TRASH.filter(function(x){ return ex.trash[x[0]].on; }).map(function(x){ return x[1]; }).join(', ') || 'keine eingetragen';
+    var syncSub = db ? 'Claude-Konto' : (MSS.tok ? 'Outlook & To Do verbunden' : 'nicht verbunden');
+    html = '<h2>Einstellungen</h2>' +
+      '<div class="set-list">' +
+        setRow('family', '👪', 'Familie', S.members.map(function(m){ return m.name; }).join(', ')) +
+        setRow('bday', '🎂', 'Geburtstage', bdList().length + ' eingetragen') +
+        setRow('kids', '👫', 'Kinderwochenende', kids) +
+        setRow('trash', '🗑', 'Mülltage', tr) +
+      '</div><div class="set-list">' +
+        setRow('export', '📊', 'Export Homeoffice & Krank', 'Tage auswerten, kopieren oder als Datei') +
+        setRow('cal', '📅', 'Feiertage & Ferien', [PREFS.hol ? 'Feiertage' : '', PREFS.ferien ? 'Ferien' : ''].filter(Boolean).join(' & ') || 'aus') +
+        setRow('look', '🎨', 'Darstellung', ({light:'Hell', dark:'Dunkel', auto:'Automatisch'})[PREFS.theme] + (PREFS.big ? ', große Schrift' : '')) +
+      '</div><div class="set-list">' +
+        setRow('sync', '☁️', 'Speicherung & Sync', syncSub) +
+        setRow('backup', '💾', 'Datensicherung', 'Backup anzeigen oder einspielen') +
+      '</div><div class="actions"><span class="grow"></span><button class="btn primary" data-act="m-cancel">Fertig</button></div>';
+  } else if (page === 'family') {
+    html = backBtn() + '<h2>Familie</h2>' + S.members.map(function(m, i){
+      var sw = COLORS.map(function(c){ return '<button type="button" class="sw' + (c === m.color ? ' on' : '') + '" data-act="m-color" data-i="' + i + '" data-c="' + c + '" style="background:' + c + '"></button>'; }).join('');
+      return '<div class="mem-row" id="mr' + i + '" data-color="' + safeColor(m.color) + '"><div class="mem-top"><span class="av" id="mav' + i + '" style="background:' + safeColor(m.color) + '">' + esc(initials(m.name)) + '</span>' +
+        '<input class="inp" id="mn' + i + '" type="text" value="' + esc(m.name) + '">' +
+        '<label class="check-row" style="margin:0"><input type="checkbox" id="ma' + i + '"' + (m.adult ? ' checked' : '') + '> Erwachsen</label></div>' +
+        '<div class="swatches">' + sw + '</div></div>';
+    }).join('') +
+    '<div class="hint" style="margin:4px 0 12px">„Erwachsen“ blendet die Arbeitsstatus-Leiste (Arbeit / Homeoffice / Frei / Krank) im Wochenkalender ein.</div>' +
+    '<div class="actions"><span class="grow"></span><button class="btn primary" data-act="m-save">Speichern</button></div>';
+  } else if (page === 'bday') {
+    var list = bdList().sort(function(a, b){ return a.date.substr(5) < b.date.substr(5) ? -1 : 1; });
+    html = backBtn() + '<h2>Geburtstage</h2>' +
+      '<div class="box"><h5 id="bd-formtitle">Neuer Geburtstag</h5><input type="hidden" id="bd-id" value="">' +
+      '<div class="row2">' + field('Name', '<input class="inp" id="bd-name" type="text" placeholder="z. B. Oma Gisela">') + field('Geburtstag', '<input class="inp" id="bd-date" type="date">') + '</div>' +
+      '<label class="check-row"><input type="checkbox" id="bd-noyear"> Geburtsjahr unbekannt (kein Alter anzeigen)</label>' +
+      '<div class="actions"><button class="btn" data-act="m-bd-reset">Leeren</button><span class="grow"></span><button class="btn primary" data-act="m-bd-save">Speichern</button></div></div>' +
+      (list.length ? '<div class="set-list">' + list.map(function(b){
+        var y = +b.date.substr(0, 4);
+        return '<div class="set-row" style="cursor:default"><span class="si">🎂</span><span class="st">' + esc(b.name) + '<small>' + +b.date.substr(8, 2) + '. ' + MON_LONG[+b.date.substr(5, 2) - 1] + (y > 1900 ? ' ' + y : '') + '</small></span>' +
+          '<button class="edit" data-act="m-bd-edit" data-id="' + esc(b.id) + '">✎</button><button class="del" data-act="m-bd-del" data-id="' + esc(b.id) + '">×</button></div>';
+      }).join('') + '</div>' : '<div class="hint">Noch keine Geburtstage eingetragen.</div>') +
+      '<div class="hint">Geburtstage erscheinen im Kalender, auf der Heute-Seite und im Reiter „Geburtstage“.</div>';
+  } else if (page === 'kids') {
+    var k = ex.kids, nk = k.on ? nextKids(4) : [];
+    html = backBtn() + '<h2>Kinderwochenende</h2>' +
+      '<label class="check-row"><input type="checkbox" id="k-on"' + (k.on ? ' checked' : '') + '> Im Kalender anzeigen</label>' +
+      field('Bezeichnung', '<input class="inp" id="k-label" type="text" value="' + esc(k.label) + '">') +
+      '<div class="row2">' + field('Beginnt am', wdSelect('k-start', k.start)) + field('Endet am', wdSelect('k-end', k.end)) + '</div>' +
+      field('In Kalenderwochen', '<select class="inp" id="k-parity"><option value="even"' + (k.parity === 'even' ? ' selected' : '') + '>gerade KW (2, 4, 6 …)</option><option value="odd"' + (k.parity === 'odd' ? ' selected' : '') + '>ungerade KW (1, 3, 5 …)</option></select>') +
+      '<div class="hint">Maßgeblich ist die KW des ersten Tags. Ab dann läuft ein fester 14-Tage-Rhythmus – auch über Jahreswechsel mit 53 Kalenderwochen.</div>' +
+      (nk.length ? '<div class="preview">Nächste Termine: ' + nk.map(function(d){ return DOW[d.getDay()] + ' ' + fmtShort(d) + ' (KW ' + isoWeek(d) + ')'; }).join(' · ') + '</div>' : '') +
+      '<div class="actions"><span class="grow"></span><button class="btn primary" data-act="m-kids-save">Speichern</button></div>';
+  } else if (page === 'trash') {
+    html = backBtn() + '<h2>Mülltage</h2>' + TRASH.map(function(x){
+      var c = ex.trash[x[0]], nx = c.on ? nextTrash(x[0], 3) : [];
+      var ev = [[1,'jede Woche'],[2,'alle 2 Wochen'],[3,'alle 3 Wochen'],[4,'alle 4 Wochen'],[0,'nur Einzeltermine']].map(function(o){ return '<option value="' + o[0] + '"' + (+c.every === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('');
+      return '<div class="box"><h5><i style="background:' + x[2] + '"></i>' + x[1] + '</h5>' +
+        '<label class="check-row"><input type="checkbox" id="t-' + x[0] + '-on"' + (c.on ? ' checked' : '') + '> Im Kalender anzeigen</label>' +
+        '<div class="row2">' + field('Rhythmus', '<select class="inp" id="t-' + x[0] + '-every">' + ev + '</select>') + field('Ein Abholtermin', '<input class="inp" type="date" id="t-' + x[0] + '-first" value="' + esc(c.first) + '">') + '</div>' +
+        '<div class="row2">' + field('Zusätzliche Termine', '<input class="inp" type="text" id="t-' + x[0] + '-add" value="' + esc(c.add) + '" placeholder="TT.MM.JJJJ, …">') + field('Entfällt am', '<input class="inp" type="text" id="t-' + x[0] + '-skip" value="' + esc(c.skip) + '" placeholder="TT.MM.JJJJ, …">') + '</div>' +
+        (nx.length ? '<div class="preview">Nächste: ' + nx.map(function(d){ return DOW[d.getDay()] + ' ' + fmtShort(d); }).join(' · ') + '</div>' : '') + '</div>';
+    }).join('') +
+    '<div class="hint">Feiertags-Verschiebungen aus dem Abfallkalender trägst du als „Entfällt am“ (alter Tag) und „Zusätzlicher Termin“ (neuer Tag) ein.</div>' +
+    '<div class="actions"><span class="grow"></span><button class="btn primary" data-act="m-trash-save">Speichern</button></div>';
+  } else if (page === 'export') {
+    var ad = adults(), t = today();
+    html = backBtn() + '<h2>Export Homeoffice &amp; Krank</h2>' +
+      field('Person', '<select class="inp" id="x-who">' + ad.map(function(m){ return '<option value="' + esc(m.id) + '">' + esc(m.name) + '</option>'; }).join('') + '<option value="*">Alle Erwachsenen</option></select>') +
+      '<div class="row2">' + field('Von', '<input class="inp" type="date" id="x-from" value="' + t.getFullYear() + '-01-01">') + field('Bis', '<input class="inp" type="date" id="x-to" value="' + ymd(t) + '">') + '</div>' +
+      '<label class="check-row"><input type="checkbox" id="x-home" checked> Homeoffice</label>' +
+      '<label class="check-row"><input type="checkbox" id="x-sick" checked> Krank</label>' +
+      '<label class="check-row"><input type="checkbox" id="x-pattern" checked> Regelwoche einbeziehen (ohne Feiertage)</label>' +
+      '<div class="actions"><span class="grow"></span><button class="btn primary" data-act="m-exp-run">Auswerten</button></div><div id="x-out"></div>';
+  } else if (page === 'cal') {
+    html = backBtn() + '<h2>Feiertage &amp; Ferien</h2>' +
+      '<label class="check-row"><input type="checkbox" id="p-hol"' + (PREFS.hol ? ' checked' : '') + '> Feiertage NRW anzeigen</label>' +
+      '<label class="check-row"><input type="checkbox" id="p-karneval"' + (PREFS.karneval ? ' checked' : '') + '> Weiberfastnacht &amp; Rosenmontag anzeigen</label>' +
+      '<label class="check-row"><input type="checkbox" id="p-ferien"' + (PREFS.ferien ? ' checked' : '') + '> Schulferien NRW anzeigen</label>' +
+      '<div class="hint">Bewegliche Ferientage legt jede Schule selbst fest – bitte als Termin eintragen. Diese Einstellung gilt nur für dieses Gerät.</div>';
+  } else if (page === 'look') {
+    html = backBtn() + '<h2>Darstellung</h2><div class="lbl">Farbschema</div><div class="wseg">' +
+      [['light','☀️ Hell'],['dark','🌙 Dunkel'],['auto','🕰 Automatisch (21–6 Uhr dunkel)']].map(function(o){ return '<button type="button" class="' + (PREFS.theme === o[0] ? 'on' : '') + '" data-act="m-pref" data-k="theme" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
+      '<div class="lbl">Schriftgröße</div><div class="wseg">' +
       [['0','Normal'],['1','Groß']].map(function(o){ return '<button type="button" class="' + ((PREFS.big ? '1' : '0') === o[0] ? 'on' : '') + '" data-act="m-pref" data-k="big" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
-    '<h4>Kalender</h4>' +
-    '<label class="check-row"><input type="checkbox" id="p-hol"' + (PREFS.hol ? ' checked' : '') + '> Feiertage NRW anzeigen</label>' +
-    '<label class="check-row"><input type="checkbox" id="p-karneval"' + (PREFS.karneval ? ' checked' : '') + '> Weiberfastnacht &amp; Rosenmontag anzeigen</label>' +
-    '<label class="check-row"><input type="checkbox" id="p-ferien"' + (PREFS.ferien ? ' checked' : '') + '> Schulferien NRW anzeigen</label>' +
-    '<div class="hint">Bewegliche Ferientage legt jede Schule selbst fest – bitte als Termin eintragen.</div>' +
-    '<h4>Speicherung</h4><div class="infobox">' + esc(info) + '</div>' +
-    msSettingsHtml() +
-    '<h4>Datensicherung</h4><div class="actions"><button class="btn" data-act="m-export">Backup anzeigen</button><button class="btn" data-act="m-import">Backup einspielen</button><span class="grow"></span><button class="btn" data-act="m-cancel">Schließen</button></div>' +
-    '<div id="bk"></div>';
-  openModal(html, {
+      '<div class="hint">Gilt nur für dieses Gerät.</div>';
+  } else if (page === 'sync') {
+    html = backBtn() + '<h2>Speicherung &amp; Sync</h2><div class="infobox">' + esc(syncInfo()) + '</div>' + msSettingsHtml();
+  } else if (page === 'backup') {
+    html = backBtn() + '<h2>Datensicherung</h2><div class="actions"><button class="btn" data-act="m-export">Backup anzeigen</button><button class="btn" data-act="m-import">Backup einspielen</button></div><div id="bk"></div>';
+  }
+  return html;
+}
+function workExport(mids, from, to, kinds, usePattern){
+  var rows = [];
+  if (!from || !to || from > to) return rows;
+  for (var d = parse(from), guard = 0; ymd(d) <= to && guard < 1200; d = addDays(d, 1), guard++) {
+    var ds = ymd(d), hol = holidays(d.getFullYear())[ds];
+    mids.forEach(function(mid){
+      var day = S.work[ds], w = (day && day[mid] && typeof day[mid] === 'object') ? day[mid] : null, src = 'eingetragen';
+      if (!w) {
+        if (!usePattern || (hol && hol.off)) return;
+        var p = S.pattern[mid]; w = p && p[d.getDay()]; src = 'Regelwoche';
+      }
+      if (!w || kinds.indexOf(w.s) < 0) return;
+      rows.push({ds:ds, d:new Date(d.getTime()), mid:mid, s:w.s, from:w.from || '', to:w.to || '', src:src});
+    });
+  }
+  return rows;
+}
+function copyText(text){
+  function fallback(){
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.top = '-1000px'; document.body.appendChild(ta);
+    ta.focus(); ta.setSelectionRange(0, text.length);
+    try { document.execCommand('copy'); toast('Kopiert'); } catch (e) { toast('Kopieren nicht möglich'); }
+    document.body.removeChild(ta);
+  }
+  try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function(){ toast('Kopiert'); }, fallback); else fallback(); } catch (e) { fallback(); }
+}
+var lastExport = null;
+function openSettings(page){
+  page = page || 'main';
+  openModal(settingsHtml(page), {
+    'm-page': function(el){ openSettings(el.getAttribute('data-p')); },
+    'm-cancel': closeModal,
     'm-color': function(el){
       var i = el.getAttribute('data-i'), c = el.getAttribute('data-c');
       $('mr' + i).setAttribute('data-color', c);
@@ -1335,11 +1624,79 @@ function openSettings(){
       S.members = S.members.map(function(m, i){
         return {id:m.id, name:$('mn' + i).value.trim() || m.name, color:safeColor($('mr' + i).getAttribute('data-color')), adult:$('ma' + i).checked};
       });
-      putConfig();
-      closeModal();
-      toast('Gespeichert');
+      putConfig(); toast('Gespeichert'); openSettings('main');
     },
-    'm-cancel': closeModal,
+    'm-bd-save': function(){
+      var name = $('bd-name').value.trim(), date = $('bd-date').value, id = $('bd-id').value;
+      if (!name || !/^\d{4}-\d{2}-\d{2}$/.test(date)) { toast('Bitte Name und Datum eintragen.'); return; }
+      if ($('bd-noyear').checked) date = '0000' + date.substr(4);
+      put('birthdays', {id: id || uid('b'), name:name, date:date});
+      toast('Gespeichert'); openSettings('bday');
+    },
+    'm-bd-reset': function(){ openSettings('bday'); },
+    'm-bd-edit': function(el){
+      var b = S.birthdays[el.getAttribute('data-id')]; if (!b) return;
+      var y = +b.date.substr(0, 4);
+      $('bd-id').value = b.id; $('bd-name').value = b.name;
+      $('bd-date').value = (y > 1900 ? b.date.substr(0, 4) : '2000') + b.date.substr(4);
+      $('bd-noyear').checked = y <= 1900;
+      $('bd-formtitle').textContent = 'Geburtstag bearbeiten';
+      $('modal').scrollTop = 0; $('bd-name').focus();
+    },
+    'm-bd-del': function(el){
+      if (el.getAttribute('data-armed') === '1') { del('birthdays', el.getAttribute('data-id')); openSettings('bday'); return; }
+      el.setAttribute('data-armed', '1'); el.textContent = 'Löschen?'; el.style.width = 'auto'; el.style.color = 'var(--danger)'; el.style.fontSize = '14px';
+    },
+    'm-kids-save': function(){
+      S.extra.kids = {on:$('k-on').checked, label:$('k-label').value.trim() || 'Kinderwochenende', start:+$('k-start').value, end:+$('k-end').value, parity:$('k-parity').value, anchor:ymd(today())};
+      putConfig(); toast('Gespeichert'); openSettings('kids');
+    },
+    'm-trash-save': function(){
+      TRASH.forEach(function(x){
+        var k = x[0];
+        S.extra.trash[k] = {on:$('t-' + k + '-on').checked, every:+$('t-' + k + '-every').value, first:$('t-' + k + '-first').value, add:$('t-' + k + '-add').value.trim(), skip:$('t-' + k + '-skip').value.trim()};
+        if (S.extra.trash[k].on && !S.extra.trash[k].first && S.extra.trash[k].every > 0 && !S.extra.trash[k].add) toast(x[1] + ': bitte einen Abholtermin eintragen');
+      });
+      putConfig(); toast('Gespeichert'); openSettings('trash');
+    },
+    'm-exp-run': function(){
+      var who = $('x-who').value, mids = who === '*' ? adults().map(function(m){ return m.id; }) : [who];
+      var kinds = []; if ($('x-home').checked) kinds.push('home'); if ($('x-sick').checked) kinds.push('sick');
+      var from = $('x-from').value, to = $('x-to').value;
+      var rows = workExport(mids, from, to, kinds, $('x-pattern').checked);
+      var names = mids.map(function(id){ var m = member(id); return m ? m.name : id; });
+      var cnt = {};
+      rows.forEach(function(r){ var key = r.mid + '|' + r.s; cnt[key] = (cnt[key] || 0) + 1; });
+      var sum = mids.map(function(id){
+        var m = member(id), parts = kinds.map(function(k){ return WORK[k].label + ': ' + (cnt[id + '|' + k] || 0) + ' Tage'; });
+        return '<b>' + esc(m ? m.name : id) + '</b> – ' + parts.join(' · ');
+      }).join('<br>');
+      var lines = ['Homeoffice- und Krankheitstage ' + fmtD(parse(from)) + ' bis ' + fmtD(parse(to)) + ' – ' + names.join(', ')];
+      mids.forEach(function(id){ var m = member(id); lines.push((m ? m.name : id) + ': ' + kinds.map(function(k){ return WORK[k].label + ' ' + (cnt[id + '|' + k] || 0) + ' Tage'; }).join(', ')); });
+      lines.push('');
+      var csv = ['Datum;Wochentag;Person;Status;Von;Bis;Quelle'];
+      rows.forEach(function(r){
+        var m = member(r.mid), nm = m ? m.name : r.mid, st = WORK[r.s].label, tm = r.from ? r.from + (r.to ? '–' + r.to : '') : '';
+        lines.push(DOW[r.d.getDay()] + ', ' + fmtD(r.d) + ' – ' + (mids.length > 1 ? nm + ' – ' : '') + st + (tm ? ' – ' + tm : '') + (r.src === 'Regelwoche' ? ' (Regelwoche)' : ''));
+        csv.push([fmtD(r.d), WD_NAMES[r.d.getDay()], nm, st, r.from, r.to, r.src].join(';'));
+      });
+      lastExport = {text:lines.join('\n'), csv:csv.join('\r\n'), name:'Homeoffice-Krank_' + names.join('-').replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g, '') + '_' + from + '_' + to + '.csv'};
+      $('x-out').innerHTML = '<div class="exp-sum">' + sum + '</div>' +
+        (rows.length ? '<div class="exp-list">' + lines.slice(mids.length + 2).slice(0, 500).map(function(l){ return '<div>' + esc(l) + '</div>'; }).join('') + '</div>' : '<div class="hint">Keine passenden Tage im Zeitraum.</div>') +
+        '<div class="actions"><button class="btn" data-act="m-exp-copy">Als Text kopieren</button><button class="btn primary" data-act="m-exp-csv">CSV-Datei (Excel)</button></div>' +
+        '<div class="hint">„Regelwoche“ = Tag stammt aus der Regel, nicht aus einem eigenen Eintrag. Feiertage werden dabei ausgelassen.</div>';
+    },
+    'm-exp-copy': function(){ if (lastExport) copyText(lastExport.text); },
+    'm-exp-csv': function(){
+      if (!lastExport) return;
+      try {
+        var blob = new Blob(['﻿' + lastExport.csv], {type:'text/csv;charset=utf-8'});
+        var url = URL.createObjectURL(blob), a = document.createElement('a');
+        a.href = url; a.download = lastExport.name; document.body.appendChild(a); a.click();
+        setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
+        toast('Datei wird gespeichert …');
+      } catch (e) { copyText(lastExport.csv); toast('Download nicht möglich – Tabelle wurde kopiert'); }
+    },
     'm-mslogin': function(){
       var oldId = msClientId(), oldTenant = msTenant();
       MSS.clientId = $('ms-client').value.trim();
@@ -1361,22 +1718,15 @@ function openSettings(){
       PREFS[k] = k === 'big' ? v === '1' : v;
       var b = el.parentNode.querySelectorAll('button');
       for (var i = 0; i < b.length; i++) b[i].className = b[i] === el ? 'on' : '';
-      saveUI(); applyTheme();
+      saveUI(); applyTheme(); render();
     },
     'm-export': function(){
-      var data = {app:'familienplaner', version:1, exported:new Date().toISOString(), members:S.members, pattern:S.pattern};
+      var data = {app:'familienplaner', version:2, exported:new Date().toISOString(), members:S.members, pattern:S.pattern, extra:S.extra};
       COLS.forEach(function(c){ data[c] = values(S[c]); });
       $('bk').innerHTML = '<div class="field" style="margin-top:12px"><label class="lbl">Backup (Text kopieren und z. B. in einer Notiz oder Mail ablegen)</label><textarea class="inp" id="bk-text" readonly style="min-height:160px;font-size:12px">' + esc(JSON.stringify(data)) + '</textarea></div>' +
         '<div class="actions"><button class="btn primary" data-act="m-copy">In Zwischenablage kopieren</button></div>';
     },
-    'm-copy': function(){
-      var ta = $('bk-text');
-      function fallback(){ ta.removeAttribute('readonly'); ta.focus(); ta.setSelectionRange(0, ta.value.length); try { document.execCommand('copy'); toast('Kopiert'); } catch (e) { toast('Bitte Text markieren und kopieren'); } ta.setAttribute('readonly', ''); }
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(function(){ toast('Kopiert'); }, fallback);
-        else fallback();
-      } catch (e) { fallback(); }
-    },
+    'm-copy': function(){ copyText($('bk-text').value); },
     'm-import': function(){
       $('bk').innerHTML = '<div class="field" style="margin-top:12px"><label class="lbl">Backup-Text hier einfügen</label><textarea class="inp" id="bk-in" style="min-height:140px;font-size:12px"></textarea></div>' +
         '<div class="hint">Vorhandene Einträge bleiben erhalten; gleiche Einträge werden überschrieben.</div><div class="actions"><button class="btn primary" data-act="m-doimport">Einspielen</button></div>';
@@ -1392,12 +1742,13 @@ function openSettings(){
       });
       if (Array.isArray(d.members) && d.members.length) S.members = sanitizeMembers(d.members);
       if (d.pattern && typeof d.pattern === 'object') S.pattern = d.pattern;
+      if (d.extra) S.extra = mergeExtra(d.extra);
       putConfig();
       closeModal();
       toast(n + ' Einträge eingespielt');
     }
   }, function(){
-    ['hol','karneval','ferien'].forEach(function(k){
+    if (page === 'cal') ['hol','karneval','ferien'].forEach(function(k){
       $('p-' + k).onchange = function(){ PREFS[k] = this.checked; saveUI(); render(); };
     });
   });
@@ -1819,11 +2170,13 @@ function syncCfg(retry){
     if (rc && (rc.updated || 0) > lc) {
       if (Array.isArray(rc.members) && rc.members.length) S.members = sanitizeMembers(rc.members);
       if (rc.pattern && typeof rc.pattern === 'object') S.pattern = rc.pattern;
+      if (rc.extra) S.extra = mergeExtra(rc.extra);
       S.cfgUpdated = rc.updated; flags.local = true;
     } else if (!rc || lc > (rc.updated || 0)) flags.upload = true;
     // Arbeitsstatus und Essensplan, Tag für Tag
     mergeMap('work', remote.work, remote.gone, flags);
     mergeMap('meals', remote.meals, remote.gone, flags);
+    mergeMap('birthdays', remote.birthdays, remote.gone, flags);
     // Einzeln gelöschte Termine von Serien
     var rsk = remote.skips || {};
     values(S.events).forEach(function(ev){
@@ -1857,7 +2210,7 @@ function syncCfg(retry){
     var skips = {}, nc = {};
     values(S.events).forEach(function(ev){ if (ev.msId && Array.isArray(ev.skip) && ev.skip.length) skips[ev.msId] = ev.skip; });
     values(S.notes).forEach(function(n){ if (n.msId && n.color) nc[n.msId] = {c:n.color, t:n.colorAt || 0}; });
-    var body = {app:'familienplaner', version:2, cfg:{updated:S.cfgUpdated, members:S.members, pattern:S.pattern},
+    var body = {app:'familienplaner', version:2, cfg:{updated:S.cfgUpdated, members:S.members, pattern:S.pattern, extra:S.extra}, birthdays:S.birthdays,
       work:S.work, meals:S.meals, gone:S.gone, skips:skips, noteColors:nc, cats:lcats};
     return gx('PUT', path + ':/content', body, etag ? {'If-Match':etag} : undefined).then(function(){ return flags.local; }, function(e){
       if (e && e.status === 412 && !retry) return syncCfg(true).then(function(c){ return c || flags.local; });
@@ -1952,11 +2305,13 @@ document.addEventListener('click', function(e){
   var ds = el.getAttribute('data-date');
   switch (act) {
     case 'tab': UI.tab = el.getAttribute('data-tab'); saveUI(); render(); $('main').scrollTop = 0; break;
-    case 'settings': openSettings(); break;
+    case 'settings': openSettings(el.id === 'sync' ? 'sync' : 'main'); break;
+    case 'bday-edit': openSettings('bday'); break;
     case 'fab':
       if (UI.tab === 'today') openEvent(null, ymd(today()));
       else if (UI.tab === 'cal') openEvent(null, UI.calMode === 'week' && ymd(weekStart(UI.calRef)) !== ymd(weekStart(today())) ? ymd(weekStart(UI.calRef)) : ymd(today()));
       else if (UI.tab === 'notes') openNote(null);
+      else if (UI.tab === 'bday') openSettings('bday');
       else if (UI.tab === 'shop') $('shopInput').focus();
       break;
     case 'cal-prev': UI.calRef = UI.calMode === 'week' ? addDays(UI.calRef, -7) : new Date(UI.calRef.getFullYear(), UI.calRef.getMonth() - 1, 1); render(); break;
@@ -2012,6 +2367,7 @@ setInterval(function(){
 
 /* ---------- Start ---------- */
 loadCache();
+try { if (window.navigator.standalone || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)) document.documentElement.className += ' standalone'; } catch (e) {}
 render();
 msHandleRedirect().then(function(){ connect(); });
 })();
