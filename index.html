@@ -1309,7 +1309,7 @@ var MS_COLS = {events:'cal', meals:'meal', shopping:'shop', notes:'notes'};
 var MS_NAMEKEYS = {cal:'events', meal:'meals', shop:'shopping', notes:'notes'};
 var MS_DEFAULT_NAMES = {cal:'Familienplaner', meal:'Essensplan', shop:'Einkauf', notes:'Notizen'};
 var WD = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
-var MS = {active:false, busy:false, again:false, timer:null, lastError:''};
+var MS = {active:false, busy:false, again:false, timer:null, lastError:'', cfgError:''};
 var MSS = (function(){
   var d = {clientId:'', tenant:'', tok:null, ever:false, ids:{}, names:clone(MS_DEFAULT_NAMES), tomb:[], last:0, silentTried:0};
   try { var x = JSON.parse(localStorage.getItem(MS_KEY) || 'null'); if (x && typeof x === 'object') Object.keys(x).forEach(function(k){ d[k] = x[k]; }); } catch (e) {}
@@ -1648,8 +1648,12 @@ var SYNC_NOTES = {
 };
 /* Familie, Regelwoche, Arbeitsstatus, Notizfarben -> Datei im OneDrive-App-Ordner */
 function syncCfg(){
-  var path = '/me/drive/special/approot:/familienplaner.json';
-  return gx('GET', path).then(function(meta){
+  /* App-Ordner zuerst direkt abfragen: OneDrive legt ihn erst dabei an */
+  var path = '';
+  return gx('GET', '/me/drive/special/approot').then(function(root){
+    path = '/me/drive/items/' + enc(root.id) + ':/familienplaner.json';
+    return gx('GET', path);
+  }).then(function(meta){
     var url = meta && meta['@microsoft.graph.downloadUrl'];
     return url ? http(url).then(function(r){ return jparse(r.text); }) : gx('GET', path + ':/content');
   }, function(e){ if (e && e.status === 404) return null; throw e; }).then(function(remote){
@@ -1695,17 +1699,25 @@ function msSync(manual){
   MS.busy = true; setSync('ms-busy');
   var changed = false;
   function mark(c){ if (c) changed = true; }
-  msEnsure()
-    .then(function(){ return syncCol(SYNC_EVENTS); }).then(mark)
-    .then(function(){ return syncCol(SYNC_SHOP); }).then(mark)
-    .then(function(){ return syncCol(SYNC_NOTES); }).then(mark)
-    .then(function(){ return syncCol(SYNC_MEALS); }).then(mark)
-    .then(function(){ return syncCfg(); }).then(mark)
-    .then(function(){ MSS.last = Date.now(); MS.lastError = ''; saveMS(); setSync('ms-ok'); if (manual) toast('Abgleich fertig'); },
+  function step(name, fn){ return function(){ return fn().then(mark, function(e){ if (e && !e.auth) e.step = name; throw e; }); }; }
+  Promise.resolve()
+    .then(step('Kalender/Listen suchen', msEnsure))
+    .then(step('Termine', function(){ return syncCol(SYNC_EVENTS); }))
+    .then(step('Einkaufsliste', function(){ return syncCol(SYNC_SHOP); }))
+    .then(step('Notizen', function(){ return syncCol(SYNC_NOTES); }))
+    .then(step('Essensplan', function(){ return syncCol(SYNC_MEALS); }))
+    .then(function(){
+      /* Familien-Datei im OneDrive: ein Fehler hier stoppt den übrigen Abgleich nicht */
+      return syncCfg().then(function(c){ mark(c); MS.cfgError = ''; }, function(e){
+        if (e && e.auth) throw e;
+        MS.cfgError = (e && e.msg) || 'unbekannter Fehler';
+      });
+    })
+    .then(function(){ MSS.last = Date.now(); MS.lastError = ''; saveMS(); setSync('ms-ok'); if (manual) toast(MS.cfgError ? 'Abgleich fertig – Familien-Datei im OneDrive nicht möglich' : 'Abgleich fertig'); },
       function(e){
         if (e && e.auth) { msAuthProblem(); return; }
-        MS.lastError = (e && e.msg) || 'Verbindung fehlgeschlagen';
-        if (e && e.status === 404) { MSS.ids = {}; saveMS(); }
+        MS.lastError = (e && e.step ? e.step + ': ' : '') + ((e && e.msg) || 'Verbindung fehlgeschlagen');
+        if (e && e.status === 404 && e.step !== 'Termine' && e.step !== 'Essensplan') { MSS.ids = {}; saveMS(); }
         setSync('ms-error');
         if (manual) toast('Abgleich fehlgeschlagen: ' + MS.lastError);
       })
@@ -1725,7 +1737,8 @@ function msSettingsHtml(){
   if (!msPossible()) return '<h4>Microsoft-Sync</h4><div class="infobox">Der Abgleich braucht eine sichere https-Adresse.</div>';
   var n = MSS.names;
   var st = MSS.tok ? 'Verbunden. ' + (MSS.last ? 'Letzter Abgleich: ' + new Date(MSS.last).toLocaleString('de-DE') + '.' : '') : 'Nicht angemeldet.';
-  if (MS.lastError) st += ' Letzter Fehler: ' + MS.lastError;
+  if (MS.lastError) st += ' Letzter Fehler – ' + MS.lastError;
+  if (MS.cfgError) st += ' Hinweis: Familie, Farben und Arbeitsstatus konnten nicht im OneDrive gespeichert werden (' + MS.cfgError + '). Termine, Listen und Notizen werden trotzdem abgeglichen.';
   var tsel = [['consumers','Privates Microsoft-Konto (outlook.de, hotmail …)'],['common','Privat- oder Arbeitskonto'],['organizations','Nur Arbeits-/Schulkonto']].map(function(o){ return '<option value="' + o[0] + '"' + (msTenant() === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('');
   return '<h4>Microsoft-Sync (Outlook &amp; To Do)</h4><div class="infobox">' + esc(st) + '</div>' +
     field('Anwendungs-ID (Client-ID) aus Azure', '<input class="inp" id="ms-client" type="text" autocapitalize="off" autocorrect="off" value="' + esc(msClientId()) + '" placeholder="z. B. 1a2b3c4d-…">') +
